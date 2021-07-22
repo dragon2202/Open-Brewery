@@ -1,20 +1,21 @@
-import React from 'react'
-import Menu from 'antd/lib/menu'
+import Breadcrumb from 'antd/lib/breadcrumb'
 
-export default function Navigation() {
+function Navigation() {
     return (
-        <nav>
-            <div className="menu-content-container">
-                <Menu mode="horizontal">
-                    <Menu.Item key="home-page">
-                        Home Page
-                    </Menu.Item>
+        <Breadcrumb>
+            <Breadcrumb.Item>
+                <a href="/"> Home</a>
+            </Breadcrumb.Item>
 
-                    <Menu.Item key="search-page">
-                        Search Page
-                    </Menu.Item>
-                </Menu>
-            </div>
-        </nav>
+            <Breadcrumb.Item>
+                <a href="/search"> Search</a>
+            </Breadcrumb.Item>
+
+            <Breadcrumb.Item>
+                <a href="/detail">Detail</a>
+            </Breadcrumb.Item>
+        </Breadcrumb>
     )
 }
+
+export { Navigation }
