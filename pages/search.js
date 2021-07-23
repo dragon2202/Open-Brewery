@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import fetch from 'node-fetch'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 

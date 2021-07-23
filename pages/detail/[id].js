@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import fetch from 'node-fetch'
 import Link from 'next/link'
 
 import { useRouter } from 'next/router'
@@ -78,7 +79,7 @@ export default function Detail() {
                     }
                     {
                         (foundObject != null) ?
-                            <Card title="Similar Brewery by type" className={styles.similardetail}>
+                            <Card title={"Similar Brewery by Type: " + foundObject.brewery_type.charAt(0).toUpperCase() + foundObject.brewery_type.slice(1)} className={styles.similardetail}>
                                 {
                                     data.map((item, index) => {
                                         if (item.brewery_type == foundObject.brewery_type) {
