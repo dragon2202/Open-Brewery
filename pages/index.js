@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import Head from 'next/head'
@@ -75,7 +76,7 @@ export default function Home() {
                   if(item.brewery_type == brewery_type || brewery_type === "All") {
                     return (
                       <Col span={6} key={index}  style={{ width:'100vh', maxWidth:'100vh'}}>
-                        <Card title={<a onClick={() => router.push(`/detail/${item.id}`)}>{item.name}</a>}>
+                        <Card title={<Link href={`/detail/${item.id}`}>{item.name}</Link>}>
                           Type: {item.brewery_type.charAt(0).toUpperCase() + item.brewery_type.slice(1)}
                         </Card>
                       </Col>
