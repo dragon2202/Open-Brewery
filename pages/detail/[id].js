@@ -22,7 +22,7 @@ export default function Detail() {
             .then(res => res.json())
             .then(data => setData(data))
             .catch(error => console.log(error))
-    }, [id])
+    }, [router])
     //Finds the object as soon as fetch is done
     useEffect(() => {
         if (data != null) {
