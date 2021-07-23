@@ -21,7 +21,14 @@ export default function Search() {
     }
 
     useEffect(() => {
-        fetch('http://api.openbrewerydb.org/breweries')
+        fetch('http://api.openbrewerydb.org/breweries', {
+            method: 'POST',
+            credentials: 'same-origin',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
             .then(res => res.json())
             .then(data => setData(data))
             .catch(error => console.log(error))
@@ -39,7 +46,7 @@ export default function Search() {
                 <h1 className={styles.title}>
                     Search Page
                 </h1>
-                
+
                 <Breadcrumb>
                     <Breadcrumb.Item>
                         <Link href={'/'}>Home</Link>
@@ -49,16 +56,16 @@ export default function Search() {
                         <Link href={'/search'}>Search</Link>
                     </Breadcrumb.Item>
                 </Breadcrumb>
-                <Input className="search-bar" placeholder="Search" onChange={handleChange} style={{marginBottom:'20px', marginTop:'20px'}}/>
+                <Input className="search-bar" placeholder="Search" onChange={handleChange} style={{ marginBottom: '20px', marginTop: '20px' }} />
 
-                <Card className={styles.cardgrid} style={{ backgroundColor: '#DAE0E6'}}>
+                <Card className={styles.cardgrid} style={{ backgroundColor: '#DAE0E6' }}>
                     <Row gutter={[16, 16]}>
                         {
                             (data != null) ?
                                 data.map((item, index) => {
                                     if ((item.name.toLowerCase()).includes(searchParam.toString().toLowerCase())) {
                                         return (
-                                            <Col span={6} key={index} style={{ width:'100vh', maxWidth:'100vh'}}>
+                                            <Col span={6} key={index} style={{ width: '100vh', maxWidth: '100vh' }}>
                                                 <Card title={<Link href={`/detail/${item.id}`}>{item.name}</Link>}>
                                                     Type: {item.brewery_type.charAt(0).toUpperCase() + item.brewery_type.slice(1)}
                                                 </Card>
