@@ -66,7 +66,7 @@ export default function Home() {
         </Breadcrumb>
 
         <Card style={{ marginTop: '20px', marginBottom: '20px'}}>
-          {(data == null) ? "Post not available" : <a onClick={() => router.push(`/detail/${data[random].id}`)}>{"Featured: " + data[random].name}</a>}
+          {(data == null) ? "Post not available" : <Link href={`/detail/${data[random].id}`}>{"Featured: " + data[random].name}</Link>}
         </Card>
         <Card className={styles.cardgrid} style={{ backgroundColor: '#DAE0E6' }}>
           <div className={styles.topnav}>
