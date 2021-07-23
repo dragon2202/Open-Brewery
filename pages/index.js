@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
 
 import Head from 'next/head'
-import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
 import Card from 'antd/lib/card'
@@ -14,7 +14,10 @@ import { Navigation } from './components/navigation'
 export default function Home() {
   const [data, setData] = useState(null)
   const [brewery_type, setType] = useState('All')
+  const router = useRouter()
+  var random = Math.floor(Math.random() * 20)
 
+  //Fetches data to set in a useState
   useEffect(() => {
     fetch('http://api.openbrewerydb.org/breweries')
       .then(res => res.json())
@@ -22,10 +25,12 @@ export default function Home() {
       .catch(error => console.log(error))
   }, [])
 
+  //Sets Brewery Type
   const handleType = (type) => {
     setType(type)
   }
 
+  //Maps out all brewery type existing in the data
   const BreweryType = (item) => {
     const unique = [...new Set(item.map(item => item.brewery_type))]
     return unique.map((item, index) => {
@@ -53,9 +58,9 @@ export default function Home() {
         <Navigation />
 
         <Card style={{ marginTop: '20px', marginBottom: '20px'}}>
-          {(data == null) ? "Post not available" : "Featured: " + data[Math.floor(Math.random() * data.length)].name}
+          {(data == null) ? "Post not available" : <a onClick={() => router.push(`/detail/${data[random].id}`)}>{"Featured: " + data[random].name}</a>}
         </Card>
-        <Card style={{ backgroundColor: '#DAE0E6' }}>
+        <Card className={styles.cardgrid} style={{ backgroundColor: '#DAE0E6' }}>
           <div className={styles.topnav}>
             <a key={0} onClick={() => handleType("All")}>All</a>
             {(data != null) ? BreweryType(data) : null}
@@ -63,16 +68,15 @@ export default function Home() {
 
           <h3>Current Filter Type: {brewery_type.charAt(0).toUpperCase() + brewery_type.slice(1)}</h3>
 
-
           <Row gutter={[16, 16]}>
-            {
+            {// Maps out based of brewery type or all types
               (data != null) ?
                 data.map((item, index) => {
                   if(item.brewery_type == brewery_type || brewery_type === "All") {
                     return (
                       <Col span={6} key={index}  style={{ width:'100vh', maxWidth:'100vh'}}>
-                        <Card title={item.name}>
-                          {item.brewery_type.charAt(0).toUpperCase() + item.brewery_type.slice(1)}
+                        <Card title={<a onClick={() => router.push(`/detail/${item.id}`)}>{item.name}</a>}>
+                          Type: {item.brewery_type.charAt(0).toUpperCase() + item.brewery_type.slice(1)}
                         </Card>
                       </Col>
                     )

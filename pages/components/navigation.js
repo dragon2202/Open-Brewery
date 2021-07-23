@@ -10,10 +10,6 @@ function Navigation() {
             <Breadcrumb.Item>
                 <a href="/search"> Search</a>
             </Breadcrumb.Item>
-
-            <Breadcrumb.Item>
-                <a href="/detail">Detail</a>
-            </Breadcrumb.Item>
         </Breadcrumb>
     )
 }
