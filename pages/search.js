@@ -1,10 +1,31 @@
+import React, { useState, useEffect } from 'react'
+
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
+import Card from 'antd/lib/card'
+import Row from 'antd/lib/row'
+import Col from 'antd/lib/col'
+import Empty from 'antd/lib/empty'
+import Input from 'antd/lib/input'
+
 import { Navigation } from './components/navigation'
 
 export default function Search() {
+    const [searchParam, setParam] = useState('')
+    const [data, setData] = useState(null)
+    const handleChange = (e) => {
+        setParam(e.target.value)
+    }
+
+    useEffect(() => {
+        fetch('http://api.openbrewerydb.org/breweries')
+            .then(res => res.json())
+            .then(data => setData(data))
+            .catch(error => console.log(error))
+    }, [])
+
     return (
         <div className={styles.container}>
             <Head>
@@ -16,8 +37,33 @@ export default function Search() {
 
             <main className={styles.main}>
                 <h1 className={styles.title}>
-                    Fart Mouth
+                    Search Page
                 </h1>
+
+                <Input className="search-bar" placeholder="Search" onChange={handleChange} style={{marginBottom:'20px', marginTop:'20px'}}/>
+
+                <Card style={{ backgroundColor: '#DAE0E6', width:'100vh', maxWidth:'100vh'}}>
+                    <Row gutter={[16, 16]}>
+                        {
+                            (data != null) ?
+                                data.map((item, index) => {
+                                    if ((item.name.toLowerCase()).includes(searchParam.toString().toLowerCase())) {
+                                        return (
+                                            <Col span={6} key={index} >
+                                                <Card title={item.name}>
+                                                    {item.brewery_type.charAt(0).toUpperCase() + item.brewery_type.slice(1)}
+                                                </Card>
+                                            </Col>
+                                        )
+                                    } else {
+                                        return null
+                                    }
+                                })
+                                :
+                                <Empty />
+                        }
+                    </Row>
+                </Card>
             </main>
         </div>
     )
