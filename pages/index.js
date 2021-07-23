@@ -19,14 +19,7 @@ export default function Home() {
 
   //Fetches data to set in a useState
   useEffect(() => {
-    fetch('http://api.openbrewerydb.org/breweries', {
-      method: 'POST',
-      credentials: 'same-origin',
-      body: JSON.stringify(data),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
+    fetch('http://api.openbrewerydb.org/breweries')
       .then(res => res.json())
       .then(data => setData(data))
       .catch(error => console.log(error))
@@ -63,16 +56,16 @@ export default function Home() {
         </h3>
 
         <Breadcrumb>
-          <Breadcrumb.Item>
-            <Link href={'/'}>Home</Link>
-          </Breadcrumb.Item>
+            <Breadcrumb.Item>
+                <Link href={'/'}>Home</Link>
+            </Breadcrumb.Item>
 
-          <Breadcrumb.Item>
-            <Link href={'/search'}>Search</Link>
-          </Breadcrumb.Item>
+            <Breadcrumb.Item>
+                <Link href={'/search'}>Search</Link>
+            </Breadcrumb.Item>
         </Breadcrumb>
 
-        <Card style={{ marginTop: '20px', marginBottom: '20px' }}>
+        <Card style={{ marginTop: '20px', marginBottom: '20px'}}>
           {(data == null) ? "Post not available" : <a onClick={() => router.push(`/detail/${data[random].id}`)}>{"Featured: " + data[random].name}</a>}
         </Card>
         <Card className={styles.cardgrid} style={{ backgroundColor: '#DAE0E6' }}>
@@ -87,9 +80,9 @@ export default function Home() {
             {// Maps out based of brewery type or all types
               (data != null) ?
                 data.map((item, index) => {
-                  if (item.brewery_type == brewery_type || brewery_type === "All") {
+                  if(item.brewery_type == brewery_type || brewery_type === "All") {
                     return (
-                      <Col span={6} key={index} style={{ width: '100vh', maxWidth: '100vh' }}>
+                      <Col span={6} key={index}  style={{ width:'100vh', maxWidth:'100vh'}}>
                         <Card title={<Link href={`/detail/${item.id}`}>{item.name}</Link>}>
                           Type: {item.brewery_type.charAt(0).toUpperCase() + item.brewery_type.slice(1)}
                         </Card>

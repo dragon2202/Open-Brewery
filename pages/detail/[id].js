@@ -19,14 +19,7 @@ export default function Detail() {
 
     //fetches the data based of path id, so you can search when you click similar breweries on this page
     useEffect(() => {
-        fetch('http://api.openbrewerydb.org/breweries', {
-            method: 'POST',
-            credentials: 'same-origin',
-            body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
+        fetch('http://api.openbrewerydb.org/breweries')
             .then(res => res.json())
             .then(data => setData(data))
             .catch(error => console.log(error))
@@ -59,7 +52,7 @@ export default function Detail() {
                         <Link href={'/search'}>Search</Link>
                     </Breadcrumb.Item>
                 </Breadcrumb>
-                <span style={{ display: 'flex' }}>
+                <span style={{ display: 'flex'}}>
                     {//Card containing details and ternary operator in case detail is missing
                         foundObject != null ?
                             <Card title={foundObject.name} className={styles.detailcard}>
