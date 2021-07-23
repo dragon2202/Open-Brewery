@@ -4,11 +4,11 @@ function Navigation() {
     return (
         <Breadcrumb>
             <Breadcrumb.Item>
-                <a href="/"> Home</a>
+                <Link href={'/'}>Home</Link>
             </Breadcrumb.Item>
 
             <Breadcrumb.Item>
-                <a href="/search"> Search</a>
+                <Link href={'/search'}>Search</Link>
             </Breadcrumb.Item>
         </Breadcrumb>
     )
