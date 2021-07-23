@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import fetch from 'node-fetch'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import axios from 'axios'
 
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
@@ -20,9 +20,9 @@ export default function Home() {
 
   //Fetches data to set in a useState
   useEffect(() => {
-    fetch('http://api.openbrewerydb.org/breweries')
-      .then(res => res.json())
-      .then(data => setData(data))
+    axios.get('http://api.openbrewerydb.org/breweries')
+      .then(res => res)
+      .then(res => setData(res.data))
       .catch(error => console.log(error))
   }, [])
 
@@ -57,16 +57,16 @@ export default function Home() {
         </h3>
 
         <Breadcrumb>
-            <Breadcrumb.Item>
-                <Link href={'/'}>Home</Link>
-            </Breadcrumb.Item>
+          <Breadcrumb.Item>
+            <Link href={'/'}>Home</Link>
+          </Breadcrumb.Item>
 
-            <Breadcrumb.Item>
-                <Link href={'/search'}>Search</Link>
-            </Breadcrumb.Item>
+          <Breadcrumb.Item>
+            <Link href={'/search'}>Search</Link>
+          </Breadcrumb.Item>
         </Breadcrumb>
 
-        <Card style={{ marginTop: '20px', marginBottom: '20px'}}>
+        <Card style={{ marginTop: '20px', marginBottom: '20px' }}>
           {(data == null) ? "Post not available" : <Link href={`/detail/${data[random].id}`}>{"Featured: " + data[random].name}</Link>}
         </Card>
         <Card className={styles.cardgrid} style={{ backgroundColor: '#DAE0E6' }}>
@@ -81,9 +81,9 @@ export default function Home() {
             {// Maps out based of brewery type or all types
               (data != null) ?
                 data.map((item, index) => {
-                  if(item.brewery_type == brewery_type || brewery_type === "All") {
+                  if (item.brewery_type == brewery_type || brewery_type === "All") {
                     return (
-                      <Col span={6} key={index}  style={{ width:'100vh', maxWidth:'100vh'}}>
+                      <Col span={6} key={index} style={{ width: '100vh', maxWidth: '100vh' }}>
                         <Card title={<Link href={`/detail/${item.id}`}>{item.name}</Link>}>
                           Type: {item.brewery_type.charAt(0).toUpperCase() + item.brewery_type.slice(1)}
                         </Card>
@@ -100,6 +100,5 @@ export default function Home() {
         </Card>
       </main>
     </div>
-
   )
 }
