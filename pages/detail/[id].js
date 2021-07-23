@@ -8,7 +8,7 @@ import styles from '../../styles/Home.module.css'
 import Empty from 'antd/lib/empty'
 import Card from 'antd/lib/card'
 
-import { Navigation } from '../components/navigation'
+import { Navigation } from '../../components/navigation'
 
 export default function Detail() {
     const router = useRouter()

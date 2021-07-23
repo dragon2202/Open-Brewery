@@ -11,7 +11,7 @@ import Col from 'antd/lib/col'
 import Empty from 'antd/lib/empty'
 import Input from 'antd/lib/input'
 
-import { Navigation } from './components/navigation'
+import { Navigation } from '../components/navigation'
 
 export default function Search() {
     const [searchParam, setParam] = useState('')

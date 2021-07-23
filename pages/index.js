@@ -10,7 +10,7 @@ import Row from 'antd/lib/row'
 import Col from 'antd/lib/col'
 import Empty from 'antd/lib/empty'
 
-import { Navigation } from './components/navigation'
+import { Navigation } from '../components/navigation'
 
 export default function Home() {
   const [data, setData] = useState(null)
