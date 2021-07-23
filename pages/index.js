@@ -9,8 +9,7 @@ import Card from 'antd/lib/card'
 import Row from 'antd/lib/row'
 import Col from 'antd/lib/col'
 import Empty from 'antd/lib/empty'
-
-import { Navigation } from '../components/navigation'
+import Breadcrumb from 'antd/lib/breadcrumb'
 
 export default function Home() {
   const [data, setData] = useState(null)
@@ -56,7 +55,15 @@ export default function Home() {
           Home
         </h3>
 
-        <Navigation />
+        <Breadcrumb>
+            <Breadcrumb.Item>
+                <Link href={'/'}>Home</Link>
+            </Breadcrumb.Item>
+
+            <Breadcrumb.Item>
+                <Link href={'/search'}>Search</Link>
+            </Breadcrumb.Item>
+        </Breadcrumb>
 
         <Card style={{ marginTop: '20px', marginBottom: '20px'}}>
           {(data == null) ? "Post not available" : <a onClick={() => router.push(`/detail/${data[random].id}`)}>{"Featured: " + data[random].name}</a>}

@@ -10,8 +10,7 @@ import Row from 'antd/lib/row'
 import Col from 'antd/lib/col'
 import Empty from 'antd/lib/empty'
 import Input from 'antd/lib/input'
-
-import { Navigation } from '../components/navigation'
+import Breadcrumb from 'antd/lib/breadcrumb'
 
 export default function Search() {
     const [searchParam, setParam] = useState('')
@@ -41,7 +40,15 @@ export default function Search() {
                     Search Page
                 </h1>
                 
-                <Navigation />
+                <Breadcrumb>
+                    <Breadcrumb.Item>
+                        <Link href={'/'}>Home</Link>
+                    </Breadcrumb.Item>
+
+                    <Breadcrumb.Item>
+                        <Link href={'/search'}>Search</Link>
+                    </Breadcrumb.Item>
+                </Breadcrumb>
                 <Input className="search-bar" placeholder="Search" onChange={handleChange} style={{marginBottom:'20px', marginTop:'20px'}}/>
 
                 <Card className={styles.cardgrid} style={{ backgroundColor: '#DAE0E6'}}>

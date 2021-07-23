@@ -9,7 +9,7 @@ import styles from '../../styles/Home.module.css'
 import Empty from 'antd/lib/empty'
 import Card from 'antd/lib/card'
 
-import { Navigation } from '../../components/navigation'
+import Breadcrumb from 'antd/lib/breadcrumb'
 
 export default function Detail() {
     const router = useRouter()
@@ -43,7 +43,15 @@ export default function Detail() {
                 <h1 className={styles.title}>
                     Detail Page: {id}
                 </h1>
-                <Navigation />
+                <Breadcrumb>
+                    <Breadcrumb.Item>
+                        <Link href={'/'}>Home</Link>
+                    </Breadcrumb.Item>
+
+                    <Breadcrumb.Item>
+                        <Link href={'/search'}>Search</Link>
+                    </Breadcrumb.Item>
+                </Breadcrumb>
                 <span style={{ display: 'flex'}}>
                     {//Card containing details and ternary operator in case detail is missing
                         foundObject != null ?
