@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import Link from 'next/link'
 
 import { useRouter } from 'next/router'
 
@@ -22,7 +23,7 @@ export default function Detail() {
             .then(res => res.json())
             .then(data => setData(data))
             .catch(error => console.log(error))
-    }, [router])
+    }, [id])
     //Finds the object as soon as fetch is done
     useEffect(() => {
         if (data != null) {
@@ -75,7 +76,7 @@ export default function Detail() {
                                         if (item.brewery_type == foundObject.brewery_type) {
                                             return (
                                                 <Card key={index}>
-                                                    <a onClick={() => router.push(`/detail/${item.id}`)}>{item.name}</a>
+                                                    <Link href={`/detail/${item.id}`}>{item.name}</Link>
                                                 </Card>
 
                                             )
